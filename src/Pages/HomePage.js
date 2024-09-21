@@ -53,6 +53,7 @@ const HomePage = () => {
   useEffect(() => {
     saveStateToLocalStorage(groupValue);
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderDataByValue, groupValue]);
 
   const fetchData = async () => {
