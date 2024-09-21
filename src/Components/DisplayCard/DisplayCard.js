@@ -16,6 +16,7 @@ const DisplayCard = (props) => {
             return icons.todo;
         case "Backlog":
             return icons.backlog;
+        default : return;
     }
   };
   return (
