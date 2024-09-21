@@ -25,11 +25,11 @@ const Header = (props) => {
           <div>
             <div className="header__button" onClick={handleDisplayToggle}>
               <div className="header__icon header__filter">
-                <img src={icons.display} />
+                <img src={icons.display} alt="display-tune"/>
               </div>
               <div className="header__heading">Display</div>
               <div className="header__icon header__down">
-                <img src={icons.down} />
+                <img src={icons.down} alt="down arrow"/>
               </div>
             </div>
             <div

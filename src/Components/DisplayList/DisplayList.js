@@ -16,20 +16,20 @@ const DisplayList = (props) => {
                 <div className="list__header-left">
                     {{
                     'status' : <>{{
-                        'Todo': <div className="list__icon"><img src={icons.todo} /></div>,
-                        'Backlog': <div className="list__icon"><img src={icons.backlog} /></div>,
-                        'In progress': <div className="list__icon"><img src={icons.inProgress} /></div>,
-                        'Done': <div className="list__icon"><img src={icons.done} /></div>,
-                        'Cancelled': <div className="list__icon"><img src={icons.cancelled} /></div>
+                        'Todo': <div className="list__icon"><img src={icons.todo} alt="Todo"/></div>,
+                        'Backlog': <div className="list__icon"><img src={icons.backlog} alt="Backlog"/></div>,
+                        'In progress': <div className="list__icon"><img src={icons.inProgress} alt="In-progress"/></div>,
+                        'Done': <div className="list__icon"><img src={icons.done} alt="Done"/></div>,
+                        'Cancelled': <div className="list__icon"><img src={icons.cancelled} alt="Cancelled"/></div>
                     }[props.listTitle]}</>,
                     
                     'user': <></>,
                     'priority' : <>{{
-                        0: <div className="card__heading-icon"><img src={icons.noPriority} /></div>,
-                        1: <div className="card__heading-icon"><img src={icons.lowPriority} /></div>,
-                        2: <div className="card__heading-icon"><img src={icons.mediumPriority} /></div>,
-                        3: <div className="card__heading-icon"><img src={icons.highPriority} /></div>,
-                        4: <div className="card__heading-icon"><img src={icons.UrgentPriorityColour} /></div>
+                        0: <div className="card__heading-icon"><img src={icons.noPriority} alt="no-priority"/></div>,
+                        1: <div className="card__heading-icon"><img src={icons.lowPriority} alt="low-priority"/></div>,
+                        2: <div className="card__heading-icon"><img src={icons.mediumPriority} alt="medium-priority"/></div>,
+                        3: <div className="card__heading-icon"><img src={icons.highPriority} alt="high-priority"/></div>,
+                        4: <div className="card__heading-icon"><img src={icons.UrgentPriorityColour} alt="urgent-priority"/></div>
                     }[props.listTitle]} </>
                     }[props.groupValue]}
 
@@ -52,8 +52,8 @@ const DisplayList = (props) => {
                     <div className="list-sum">{countCard}</div>
                 </div>
                 <div className="list__header-right">
-                    <div className="list__add-item"><img src={icons.add}/></div>
-                    <div className="list__option-item"><img src={icons.dotMenu}/></div>
+                    <div className="list__add-item"><img src={icons.add} alt="add"/></div>
+                    <div className="list__option-item"><img src={icons.dotMenu} alt="menu"/></div>
                 </div>
             </div>
 

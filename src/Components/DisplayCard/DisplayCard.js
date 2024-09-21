@@ -36,11 +36,11 @@ const DisplayCard = (props) => {
             </div>
 
             <div className="card__tag">
-               {{0: <div className="card__tag-icon"><img src={icons.noPriority} style={{ width : "1.5em"}}/></div>,
-                 1: <div className="card__tag-icon"><img src={icons.lowPriority} style={{ width : "1.5em"}}/></div>,  
-                 2: <div className="card__tag-icon"><img src={icons.mediumPriority} style={{ width : "1.5em"}}/></div>, 
-                 3: <div className="card__tag-icon"><img src={icons.highPriority} style={{ width : "1.5em"}}/></div>,  
-                 4: <div className="card__tag-icon"><img src={icons.urgentPriorityGrey} style={{ width : "1.5em"}}/></div> 
+               {{0: <div className="card__tag-icon"><img src={icons.noPriority} style={{ width : "1.5em"}} alt="no-priority"/></div>,
+                 1: <div className="card__tag-icon"><img src={icons.lowPriority} style={{ width : "1.5em"}} alt="low-priority"/></div>,  
+                 2: <div className="card__tag-icon"><img src={icons.mediumPriority} style={{ width : "1.5em"}} alt="medium-priority"/></div>, 
+                 3: <div className="card__tag-icon"><img src={icons.highPriority} style={{ width : "1.5em"}} alt="high-priority"/></div>,  
+                 4: <div className="card__tag-icon"><img src={icons.urgentPriorityGrey} style={{ width : "1.5em"}} alt="urgent-priority"/></div> 
                 }[props.cardDetails.priority]}
                 
                 {props.cardDetails.tag.map((tag) => {
