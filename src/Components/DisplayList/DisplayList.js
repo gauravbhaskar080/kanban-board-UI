@@ -49,7 +49,9 @@ const DisplayList = (props) => {
                         }[props.groupValue]
                         }
                     </div>
-                    <div className="list-sum">{countCard}</div>
+                    <div className="list-sum">
+                        {/* {countCard} */}
+                    </div>
                 </div>
                 <div className="list__header-right">
                     <div className="list__add-item"><img src={icons.add} alt="add"/></div>
