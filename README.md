@@ -16,7 +16,7 @@ This project is an interactive Kanban board application built with React JS. It 
 
 ## Demo
 
-[Link to Demo](https://gb-kanban-board.vercel.app/)
+[Link to Demo](https://gb-kanban.vercel.app/)
 
 ## Features
 
