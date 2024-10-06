@@ -6,6 +6,7 @@ import Header from "../Components/Header/Header";
 import DisplayList from "../Components/DisplayList/DisplayList";
 
 import "../Stylesheets/HomePage.css";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const HomePage = () => {
   // const [listStatus, setListStatus] = useState([]);
@@ -21,7 +22,6 @@ const HomePage = () => {
   
   const [users, setUsers] = useState([]);
   const [priorityList, setPriorityList] = useState([]);
-  
   const [groupValue, setGroupValue] = useState(getStateFromLocalStorage() || "status");
   const [orderValue, setOrderValue] = useState("title");
   const [ticketDetails, setTicketDetails] = useState([]);
@@ -37,11 +37,11 @@ const HomePage = () => {
       }
       setTicketDetails([...arrayOfCards]);
     },
-    [orderValue, setTicketDetails]
+    [orderValue]
   );
 
   function saveStateToLocalStorage(state) {
-    if (state !== undefined && state !== null) {
+    if (state) {
       localStorage.setItem("groupValue", JSON.stringify(state));
     }
   }
@@ -73,14 +73,16 @@ const HomePage = () => {
     // const statUses = Array.from(new Set(data.tickets.map(ticket => ticket.status)));
     // setListStatus(statUses);
     
-    const users = data.users.map(user => user.name);
+    const users = data.users.map(user => ({ name: user.name, id: user.id }));
+    // const users = data.users.map(user => user.name);
     setUsers(users);
 
     const uniquePriorities = Array.from(new Set(data.tickets.map(ticket => ticket.priority)));
 
-    const noPriority = uniquePriorities.filter(priority => priority === 0);
-    const otherPriorities = uniquePriorities.filter(priority => priority !== 0).sort((a, b) => b - a);
-    const sortedPriorities = [...noPriority, ...otherPriorities].map(priority => ({
+    // const noPriority = uniquePriorities.filter(priority => priority === 0);
+    // const otherPriorities = uniquePriorities.filter(priority => priority !== 0).sort((a, b) => b - a);
+    const priorities = uniquePriorities.sort((a, b) => b - a);
+    const sortedPriorities = [...priorities].map(priority => ({
       name: getPriorityName(priority),
       priority
     }));
@@ -92,7 +94,7 @@ const HomePage = () => {
 
     const ticketArray = data.tickets.map((ticket) => ({
       ...ticket,
-      userObj: userMap.get(ticket.userId),
+      userObj: {...userMap.get(ticket.userId)},
     }));
 
     setTicketDetails(ticketArray);
@@ -101,14 +103,50 @@ const HomePage = () => {
 
   function getPriorityName(priority) {
     switch (priority) {
+      case 0: return "No priority";
       case 4: return "Urgent";
       case 3: return "High";
       case 2: return "Medium";
       case 1: return "Low";
-      default: return "No priority";
+      default: return "";
     }
   }
 
+  const handleDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+
+    console.log(source, destination);
+  
+    // If no destination, return early (dragging canceled)
+    if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) {
+      return;
+    }
+  
+    // Make a deep copy of the current ticket details
+    const updatedTickets = Array.from(ticketDetails);
+  
+    // Find the ticket being dragged
+    const draggedTicket = updatedTickets.find(
+      (ticket) => ticket.id.toString() === draggableId
+    );
+
+    console.log(draggedTicket);
+
+    if (groupValue === "status") {
+      draggedTicket.status = destination.droppableId;
+    } else if (groupValue === "priority") {
+      draggedTicket.priority = destination.droppableId;
+    } else {
+      draggedTicket.userObj.name = destination.droppableId;
+      // draggedTicket.userId = destination.droppableId;
+    }
+
+    console.log(updatedTickets)
+
+    setTicketDetails(updatedTickets);
+  };
+
+  
   function handleGroupValue(value) {
     setGroupValue(value);
   }
@@ -125,6 +163,7 @@ const HomePage = () => {
         handleGroupValue={handleGroupValue}
         handleOrderValue={handleOrderValue}
       />
+      <DragDropContext onDragEnd={handleDragEnd}>
       <section className="Details__board">
         <div className="Details__board__lists">
           {groupValue === "status" &&
@@ -146,7 +185,7 @@ const HomePage = () => {
                 key={user}
                 groupValue="user"
                 orderValue={orderValue}
-                listTitle={user}
+                listTitle={user.name}
                 listIcon=""
                 users={users}
                 ticketDetails={ticketDetails}
@@ -167,6 +206,7 @@ const HomePage = () => {
             ))}
         </div>
       </section>
+      </DragDropContext>
     </>
   );
 };

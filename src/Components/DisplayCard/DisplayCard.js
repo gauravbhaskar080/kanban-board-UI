@@ -3,6 +3,8 @@ import React from 'react'
 import "../../Stylesheets/DisplayCard.css";
 import * as icons from "../../Assets/index.js";
 
+import { Draggable } from "react-beautiful-dnd";
+
 const DisplayCard = (props) => {
   const getIconForStatus = (status) => {
     switch (status) {
@@ -21,7 +23,9 @@ const DisplayCard = (props) => {
   };
   return (
     <>
-       <div className="card__container">
+    <Draggable draggableId={props.cardDetails.id.toString()} index={props.index}>
+    {(provided) => (
+       <div className="card__container" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}  key={props.cardDetails.id}>
             <div className="cardID__wrapper">
                 <div className="cardID">{props.cardDetails.id}</div>
                 <div className="card__profile">
@@ -52,7 +56,10 @@ const DisplayCard = (props) => {
                     )
                 })}
             </div>
-        </div>
+       </div>
+
+    )}
+    </Draggable>
     </>
   )
 }
